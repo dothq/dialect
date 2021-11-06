@@ -13,7 +13,7 @@ const Home = () => {
                 <div className={"max-w-7xl w-full flex justify-center flex-col gap-14"}>
                     <h1 className={"text-8xl font-extrabold max-w-10xl"}>
                         Crowdsourced translation made <span className={"text-yellow-500"}>
-                            easy-peesy
+                            easy-peasy
                         </span>.
                     </h1>
 
