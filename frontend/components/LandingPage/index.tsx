@@ -1,12 +1,10 @@
-import { Header } from "../components/Header";
-import { Layout } from "../components/Layout";
+import React from "react"
+import { ArrowRight } from "react-feather"
+import { Header } from "../Header"
 
-import { ArrowRight } from "react-feather";
-import { Github } from "@icons-pack/react-simple-icons"
-
-const Home = () => {
+export const LandingPage = () => {
     return (
-        <Layout title={"Home"}>
+        <div>
             <Header />
 
             <div className={"w-full h-full flex justify-center py-40 px-4 md:px-8 xl:px-0"}>
@@ -32,8 +30,6 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-        </Layout>
+        </div> 
     )
 }
-
-export default Home;

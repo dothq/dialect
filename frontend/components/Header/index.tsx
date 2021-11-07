@@ -1,3 +1,5 @@
+import React from "react"
+
 export const Header = () => {
     return (
         <header className={"h-20 w-full px-4 md:px-8 xl:px-0 flex justify-center"}>
