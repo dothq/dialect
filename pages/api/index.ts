@@ -1,3 +1,3 @@
-import { nextApiHandler } from "../../api/next-handler";
+import { RootRoute } from "../../api/routes";
 
-export default (req, res) => nextApiHandler(req, res);
+export default (req, res) => new RootRoute().handler(req, res);
