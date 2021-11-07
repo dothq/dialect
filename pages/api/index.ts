@@ -1,3 +1,3 @@
-import { nextApiHandler } from "./[...route]";
+import { nextApiHandler } from "../../api/next-handler";
 
-export default nextApiHandler;
+export default (req, res) => nextApiHandler(req, res);
