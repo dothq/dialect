@@ -6,20 +6,12 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["dataProxy"]
 }
 
 model Audio {
   engine      String        @id
-  Translation Translation[]
-}
-
-model Author {
-  id          String        @id
-  username    String
-  name        String
-  Language    Language[]
-  Memory      Memory[]
   Translation Translation[]
 }
 
@@ -43,7 +35,6 @@ model Highlight {
 model Language {
   id            String       @id
   name          String
-  maintainer    Author       @relation(fields: [maintainer_id], references: [id])
   maintainer_id String
   Translation   Translation? @relation(fields: [translationId], references: [id])
   translationId String?
@@ -52,7 +43,6 @@ model Language {
 model Memory {
   id            String       @id
   alt           String
-  author        Author       @relation(fields: [author_id], references: [id])
   author_id     String
   date_created  DateTime     @default(now())
   date_updated  DateTime?
@@ -61,27 +51,38 @@ model Memory {
   translationId String?
 }
 
-model Translation {
-  id                          String              @id
-  string                      String
-  category                    Category            @relation(fields: [category_id], references: [id])
-  category_id                 String
-  context                     TranslationContext? @relation(fields: [translationContextString_id], references: [string_id])
-  author                      Author              @relation(fields: [author_id], references: [id])
-  author_id                   String
-  upvotes                     Int
-  downvotes                   Int
-  date_created                DateTime            @default(now())
-  date_updated                DateTime?
-  memories                    Memory[]
-  languages                   Language[]
-  audio                       Audio               @relation(references: [engine], fields: [audioEngine])
-  translationContextString_id String?
-  audioEngine                 String
+model Organisation {
+  id            Int       @id @default(autoincrement())
+  slug          String    @unique
+  name          String
+  owner_id      Int
+  linked_domain String?   @unique
+  date_created  DateTime  @default(now())
+  date_updated  DateTime?
 }
 
-model TranslationContext {
-  string_id   String        @id
-  comment     String
-  Translation Translation[]
+model Project {
+  id           Int       @id @default(autoincrement())
+  slug         String
+  name         String
+  org_id       Int
+  date_created DateTime  @default(now())
+  date_updated DateTime?
+}
+
+model Translation {
+  id                  String     @id
+  string              String
+  category            Category   @relation(fields: [category_id], references: [id])
+  category_id         String
+  translation_comment String?
+  author_id           String
+  upvotes             Int        @default(0)
+  downvotes           Int        @default(0)
+  date_created        DateTime   @default(now())
+  date_updated        DateTime?
+  memories            Memory[]
+  languages           Language[]
+  audio               Audio      @relation(references: [engine], fields: [audioEngine])
+  audioEngine         String
 }

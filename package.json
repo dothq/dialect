@@ -6,9 +6,12 @@
     "build": "yarn run prisma && next build",
     "start": "next start",
     "lint": "next lint",
-    "prisma": "prisma-merge -b db/base.prisma -o ./db/schema.prisma -s './db/**/*.prisma' && npx prisma format --schema db/schema.prisma && npx prisma generate --schema db/schema.prisma"
+    "prisma": "prisma-merge -b db/base.prisma -o ./db/schema.prisma -s './db/**/*.prisma' && npx prisma format --schema db/schema.prisma && PRISMA_CLIENT_ENGINE_TYPE=dataproxy npx prisma generate --schema db/schema.prisma"
   },
   "dependencies": {
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.1.0",
     "@prisma/client": "^3.4.2",
     "@radix-ui/react-dropdown-menu": "^0.1.1",
     "autoprefixer": "^10.4.0",

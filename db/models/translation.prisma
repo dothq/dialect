@@ -3,19 +3,13 @@ model Translation {
     string String
     category Category @relation(fields: [category_id], references: [id])
     category_id String
-    context TranslationContext?
-    author Author @relation(fields: [author_id], references: [id])
+    translation_comment String?
     author_id String
-    upvotes Int
-    downvotes Int
+    upvotes Int @default(0)
+    downvotes Int @default(0)
     date_created DateTime @default(now())
     date_updated DateTime?
     memories Memory[]
     languages Language[]
     audio Audio @relation(references: [engine])
-}
-
-model TranslationContext {
-    string_id String @id
-    comment String
 }
