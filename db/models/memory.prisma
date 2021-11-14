@@ -1,0 +1,9 @@
+model Memory {
+    id String @id
+    alt String
+    author Author @relation(fields: [author_id], references: [id])
+    author_id String
+    date_created DateTime @default(now())
+    date_updated DateTime?
+    highlights Highlight[]
+}

@@ -57,13 +57,13 @@ const Dashboard = () => {
                         </div>
 
                         <div className={"flex gap-1 border-t border-gray-200 p-12"}>
-                            <div className={"w-full rounded-xl h-full pt-20 flex justify-center items-center gap-3 flex-col transition-all hover:bg-gray-100"}>
+                            <div onClick={() => router.push("/app/validate")} className={"w-full rounded-xl h-full pt-20 flex justify-center items-center gap-3 flex-col transition-all hover:bg-gray-100"}>
                                 <CheckCircle className={"w-10 h-10 mb-2"} />
                                 <h1 className={"text-3xl font-semibold"}>Validate</h1>
                                 <p className={"text-gray-500 mb-4 text-center max-w-sm"}>Review other people's translations and contributions.</p>
                                 <img src={"/assets/images/validate-banner.svg"}></img>
                             </div>
-                            <div className={"w-full rounded-xl h-full pt-20 flex justify-center items-center gap-3 flex-col transition-all hover:bg-gray-100"}>
+                            <div onClick={() => router.push("/app/translate")} className={"w-full rounded-xl h-full pt-20 flex justify-center items-center gap-3 flex-col transition-all hover:bg-gray-100"}>
                                 <Globe className={"w-10 h-10 mb-2"} />
                                 <h1 className={"text-3xl font-semibold"}>Translate</h1>
                                 <p className={"text-gray-500 mb-4 text-center max-w-sm"}>Write your own translations.</p>

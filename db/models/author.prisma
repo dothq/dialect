@@ -1,0 +1,5 @@
+model Author {
+    id String @id
+    username String
+    name String
+}

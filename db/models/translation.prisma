@@ -1,0 +1,21 @@
+model Translation {
+    id String @id
+    string String
+    category Category @relation(fields: [category_id], references: [id])
+    category_id String
+    context TranslationContext?
+    author Author @relation(fields: [author_id], references: [id])
+    author_id String
+    upvotes Int
+    downvotes Int
+    date_created DateTime @default(now())
+    date_updated DateTime?
+    memories Memory[]
+    languages Language[]
+    audio Audio @relation(references: [engine])
+}
+
+model TranslationContext {
+    string_id String @id
+    comment String
+}

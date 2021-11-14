@@ -1,0 +1,4 @@
+model Category {
+    id String @id
+    name String
+}

@@ -1,0 +1,6 @@
+model Language {
+    id String @id
+    name String
+    maintainer Author @relation(fields: [maintainer_id], references: [id])
+    maintainer_id String
+}
