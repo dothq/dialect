@@ -1,9 +1,0 @@
-model Organisation {
-    id Int @id @default(autoincrement())
-    slug String @unique
-    name String
-    owner_id Int
-    linked_domain String? @unique
-    date_created DateTime @default(now())
-    date_updated DateTime?
-}

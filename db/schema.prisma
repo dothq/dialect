@@ -6,8 +6,7 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["dataProxy"]
+  provider = "prisma-client-js"
 }
 
 model Audio {
@@ -36,6 +35,8 @@ model Language {
   id            String       @id
   name          String
   maintainer_id String
+  Project       Project?     @relation(fields: [projectId], references: [id])
+  projectId     Int?
   Translation   Translation? @relation(fields: [translationId], references: [id])
   translationId String?
 }
@@ -51,23 +52,13 @@ model Memory {
   translationId String?
 }
 
-model Organisation {
-  id            Int       @id @default(autoincrement())
-  slug          String    @unique
-  name          String
-  owner_id      Int
-  linked_domain String?   @unique
-  date_created  DateTime  @default(now())
-  date_updated  DateTime?
-}
-
 model Project {
-  id           Int       @id @default(autoincrement())
-  slug         String
-  name         String
-  org_id       Int
-  date_created DateTime  @default(now())
-  date_updated DateTime?
+  id                  Int        @id @default(autoincrement())
+  slug                String
+  name                String
+  date_created        DateTime   @default(now())
+  date_updated        DateTime?
+  supported_languages Language[]
 }
 
 model Translation {
