@@ -18,8 +18,15 @@ const NewLanguageDialog = ({ projectName }: { projectName: string }) => {
     const [nativeName, setNativeName] = React.useState("");
     const [speakers, setSpeakers] = React.useState<any>();
 
+    const reset = () => {
+        setName("");
+        setCode("");
+        setNativeName("");
+        setSpeakers(null);
+    }
+
     return (
-        <Dialog>
+        <Dialog onOpenChange={reset}>
             <DialogTrigger asChild>
                 <SidebarItem>
                     Add Language <Plus className={"ml-auto w-5 h-5"} />
