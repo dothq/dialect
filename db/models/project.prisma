@@ -2,6 +2,8 @@ model Project {
     id Int @id @default(autoincrement())
     slug String
     name String
+    deadline DateTime?
+    priority Int? @default(0)
     date_created DateTime @default(now())
     date_updated DateTime?
     supported_languages Language[]

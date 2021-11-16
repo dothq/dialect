@@ -6,9 +6,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method == "POST") {
         await ensureAuth(req, res);
 
-        const created = await db.project.create({ data: req.body });
+        await db.project.create({ data: req.body });
 
-        res.redirect(`/`)
+        res.json({ ok: true });
     } else {
         res.status(404);
     }

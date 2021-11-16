@@ -24,7 +24,7 @@ const NewProject = () => {
         setTimeout(() => {
             axios.post("/api/projects/create", { name, slug })
                 .then(res => {
-                    window.location.href = `/${slug}`
+                    window.location.href = `/projects/${slug}`
                 }).catch(e => setError(e.message))
         }, 500);
     }
@@ -66,7 +66,7 @@ const NewProject = () => {
                                 variant="standard"
                                 error={inputError}
                                 value={name}
-                                className={"w-1/2"}
+                                className={"w-1/2 flex"}
                                 onChange={(e) => {
                                     setHint([true, hint[1]])
                                     setName(e.target.value.substr(0, 64));

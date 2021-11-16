@@ -19,6 +19,26 @@
     }
 }
 
+@keyframes dialog-grow {
+    0% {
+        transform: scale(0.95) translate(-50%, -50%);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+@keyframes menu-fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 :root,
 body,
 html,
@@ -37,4 +57,13 @@ input {
 
 :focus-visible {
     outline: none;
+}
+
+.progress-fill-current::-moz-progress-bar,
+.progress-fill-current::-webkit-progress-bar {
+    background-color: currentColor;
+}
+
+.animate-overlay-dialog-open {
+    animation: 0.15s menu-fade forwards;
 }
