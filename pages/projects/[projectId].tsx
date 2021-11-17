@@ -6,6 +6,7 @@ import { NextSeo } from "next-seo"
 import { useRouter } from "next/dist/client/router"
 import React from "react"
 import { Plus } from "react-feather"
+import title from "title"
 import { Header } from "../../components/Header"
 import { SidebarItem } from "../../components/SidebarItem"
 import { SidebarSection } from "../../components/SidebarSection"
@@ -18,12 +19,20 @@ const NewLanguageDialog = ({ projectName }: { projectName: string }) => {
     const [nativeName, setNativeName] = React.useState("");
     const [speakers, setSpeakers] = React.useState<any>();
 
+    const [codeError, setCodeError] = React.useState(false);
+
     const reset = () => {
         setName("");
         setCode("");
         setNativeName("");
-        setSpeakers(null);
+        setSpeakers(undefined);
     }
+
+    const [lang, setLang] = React.useState('');
+
+    const handleLangChange = (event: SelectChangeEvent) => {
+        setAge(event.target.value);
+    };
 
     return (
         <Dialog onOpenChange={reset}>
@@ -38,7 +47,7 @@ const NewLanguageDialog = ({ projectName }: { projectName: string }) => {
                     <h1 className={"text-xl font-semibold"}>Add Language</h1>
                     <p className={"text-gray-600"}>Request the addition of a new language to <b>{projectName}</b>.</p>
                 
-                    <form className={"mt-4 flex flex-col gap-5"}>
+                    <form className={"mt-4 flex flex-col gap-5"}>                    
                         <fieldset className={"flex flex-col gap-4"}>
                             <TextField 
                                 fullWidth 
@@ -47,7 +56,7 @@ const NewLanguageDialog = ({ projectName }: { projectName: string }) => {
                                 className={"w-1/2 flex"}
                                 required
                                 value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setName(title(e.target.value))}
                             />
                         </fieldset>
 
@@ -58,8 +67,33 @@ const NewLanguageDialog = ({ projectName }: { projectName: string }) => {
                                 variant="standard"
                                 className={"w-1/2 flex"}
                                 required
+                                error={codeError}
                                 value={code}
-                                onChange={(e) => setCode(e.target.value)}
+                                inputProps={{
+                                    pattern: "^([a-z]{2})(-[A-Z]{2})?"
+                                }}
+                                onChange={(e) => {
+                                    const regex = /^([a-z]{2})(-[A-Z]{2})?/;
+                                    const value = e.target.value.replace(/ /g, "") as any || "";
+
+                                    console.log(e.target.value);
+
+                                    setCode(value);
+
+                                    const match = value.match(regex);
+
+                                    if(
+                                        (
+                                            match && 
+                                            match[0] &&
+                                            match[0] == value
+                                        )
+                                    ) {
+                                        setCodeError(false)
+                                    } else {
+                                        setCodeError(!!value.length)
+                                    }
+                                }}
                             />
                             <span className={"text-sm text-gray-600"}>
                                 Must be a valid language code. For example, <b>en-US</b> or <b>fr-FR</b>.
@@ -74,7 +108,7 @@ const NewLanguageDialog = ({ projectName }: { projectName: string }) => {
                                 className={"w-1/2 flex"}
                                 required
                                 value={nativeName}
-                                onChange={(e) => setNativeName(e.target.value)}
+                                onChange={(e) => setNativeName(title(e.target.value))}
                             />
                             <span className={"text-sm text-gray-600"}>
                                 Native name of your language. For example, <b>Français</b>.

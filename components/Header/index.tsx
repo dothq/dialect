@@ -25,12 +25,32 @@ export const Header = () => {
     return (
         <header className={"w-full h-16 px-4 md:px-8 xl:px-0 flex justify-center sticky top-0 bg-white"}>
             <div className={"w-full h-full max-w-7xl flex items-center relative justify-between border-b border-gray-200"}>
-                <div>
+                <div className={"flex items-center gap-8"}>
                     <Link href={"/"}>
                         <a className={"flex gap-4 items-center flex-1"}>
                             <img src={"/assets/images/logo.svg"}></img>
                         </a>
                     </Link>
+
+                    <div className={"flex gap-10"}>
+                        <Link href={"/"}>
+                            <a className={"font-medium text-gray-600 hover:text-gray-900 transition-all"}>
+                                Explore
+                            </a>
+                        </Link>
+
+                        <Link href={"/languages"}>
+                            <a className={"font-medium text-gray-600 hover:text-gray-900 transition-all"}>
+                                Languages
+                            </a>
+                        </Link>
+
+                        <Link href={"/engine"}>
+                            <a className={"font-medium text-gray-600 hover:text-gray-900 transition-all"}>
+                                Engine
+                            </a>
+                        </Link>
+                    </div>
                 </div>
 
                 <div className={"flex gap-4 items-center flex-1 justify-end"}>

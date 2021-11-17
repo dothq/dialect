@@ -26,6 +26,9 @@ class Application extends React.Component<AppProps & { authed: boolean }> {
                     contrastText: '#fff',
                 },
             },
+            zIndex: {
+                modal: 2147483647
+            },
             typography: {
                 fontFamily: `inherit`,
             },
