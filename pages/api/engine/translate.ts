@@ -13,23 +13,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const r = await axios.get(
-        `https://google.com/search?q=${q}`,
+        `https://translate.google.com/m?sl=${req.query.from}&tl=${req.query.to}&q=${encodeURIComponent(req.query.q.toString())}`,
         { headers }
     );
 
     const $ = cheerio.load(r.data);
 
-    const from = $(`select[name="tlitesl"]`).val();
-    const to = $(`select[name="tlitetl"]`).val();
-
-    const text = $(`input[name="tlitetxt"]`).val();
-    let translated = $(`#lrtl-translation-text`).text();
+    const text = $(`input[name="q"]`).val();
+    let translated = $(`.result-container`).text();
 
     if(!translated || !translated.length) translated = req.query.q.toString();
 
     res.json({
-        from,
-        to,
         text,
         translated
     });

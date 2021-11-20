@@ -33,14 +33,25 @@ const Explore = ({ projects }: { projects: Project[] }) => {
     const [rows, setRows] = React.useState<Project[]>(projects);
 
     const onChange = (e: any) => {
-        if(!e.target.value.length) return setRows(projects);
+        if(!e.target.value.length) delete router.query.q;
+        else router.query.q = e.target.value;
+        
+        router.push(router);
+    }
+
+    const update = () => {
+        const q = router.query.q?.toString();
+        if(!q || !q.length) return setRows(projects);
 
         const filteredRows = projects.filter((row) => {
-            return row.name.toLowerCase().includes(e.target.value.toLowerCase());
+            return row.name.toLowerCase().includes(q.toLowerCase());
         });
 
         setRows(filteredRows);
     }
+
+    React.useEffect(() => update(), []);
+    React.useEffect(() => update(), [router]);
 
     return (
         <>
@@ -95,7 +106,7 @@ const Explore = ({ projects }: { projects: Project[] }) => {
                                             "&:last-child td, &:last-child th": { border: 0 }
                                         }}
                                     >
-                                        <TableCell component="th" scope="row" className={"group-hover:text-blue-500 font-medium transition-all"}>
+                                        <TableCell component="th" scope="row" className={"group-hover:text-blue-500 font-medium transition-all"} style={{ minWidth: "150px", maxWidth: "150px" }}>
                                             {project.name}
                                         </TableCell>
                                         <TableCell scope="row">

@@ -34,8 +34,10 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
         if(r.data && r.data.error) return res.end(r.data.error_description ? r.data.error_description : r.data.error);
         else {
             nookies.set({ res }, "session", r.data.access_token, { path: "/" });
+            const cookies = nookies.get({ req });
 
-            res.redirect("/");
+            nookies.destroy({ res }, "sign_in_redir", { path: "/" });
+            res.redirect(cookies.sign_in_redir ? cookies.sign_in_redir : "/");
         }
     })
 }

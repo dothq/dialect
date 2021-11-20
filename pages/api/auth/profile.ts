@@ -5,6 +5,8 @@ import nookies from "nookies";
 export default (req: NextApiRequest, res: NextApiResponse) => {
     const cookies = nookies.get({ req });
 
+    nookies.destroy({ res }, "sign_in_redir", { path: "/" });
+
     if(cookies && cookies.session) {
         axios.get(
             "https://api.github.com/user", {

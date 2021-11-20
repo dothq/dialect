@@ -251,8 +251,7 @@ export const defaultLanguages = [
         code: "hi-IN",
         name: "Hindi",
         script: LanguageScript.Devanagari,
-        direction: LanguageDirection.LTR,
-        population: 35048000,
+        direction: LanguageDirection.LTR
     },
     {
         code: "hu-HU",

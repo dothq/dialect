@@ -54,7 +54,7 @@ export const Header = () => {
                 </div>
 
                 <div className={"flex gap-4 items-center flex-1 justify-end"}>
-                    {!authed && <a href={"/api/auth/sign-in"} className={"rounded-xl group px-4 py-2 bg-gray-900 hover:bg-gray-700 transition-all text-white font-semibold flex text-base relative items-center gap-2"}>
+                    {!authed && <a href={`/api/auth/sign-in?to=${router.asPath}`} className={"rounded-xl group px-4 py-2 bg-gray-900 hover:bg-gray-700 transition-all text-white font-semibold flex text-base relative items-center gap-2"}>
                         Sign In
                     </a>}
 

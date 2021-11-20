@@ -2,7 +2,7 @@ import TextField from "@mui/material/TextField";
 import axios from "axios";
 import { NextSeo } from "next-seo";
 import React from "react";
-import { AlertCircle } from "react-feather";
+import { AlertCircle, Plus } from "react-feather";
 import { Header } from "../../components/Header";
 import { SidebarWMain } from "../../components/SidebarWMain";
 
@@ -35,8 +35,12 @@ const NewProject = () => {
 
             <Header />
 
-            <SidebarWMain>
-                <div className={"flex flex-col gap-4 p-12"}>
+            <SidebarWMain hideSidebar={true}>
+                <div className={"flex flex-col gap-4 py-12 justify-center items-center text-center"}>
+                    <h1 className={"text-3xl font-semibold"}>
+                        <Plus className={"w-12 flex h-12"} />
+                    </h1>
+                    
                     <h1 className={"text-3xl font-semibold"}>
                         Create a new project
                     </h1>
@@ -58,15 +62,15 @@ const NewProject = () => {
                         </span>
                     </div>
 
-                    <form className={"mt-5 flex flex-col gap-8"} onSubmit={create}>
-                        <fieldset className={"flex flex-col gap-4"}>
+                    <form className={"mt-5 flex flex-col gap-8 w-full items-center"} onSubmit={create}>
+                        <fieldset className={"flex flex-col gap-4 w-96"}>
                             <TextField 
                                 fullWidth 
                                 label="Project name" 
                                 variant="standard"
                                 error={inputError}
                                 value={name}
-                                className={"w-1/2 flex"}
+                                className={"flex"}
                                 onChange={(e) => {
                                     setHint([true, hint[1]])
                                     setName(e.target.value.substr(0, 64));
@@ -101,7 +105,7 @@ const NewProject = () => {
                             </span>
                         </fieldset>
 
-                        <fieldset>
+                        <fieldset className={"flex justify-center"}>
                             <button type={"submit"} className={"rounded-xl w-max group px-4 py-2 bg-gray-900 hover:bg-gray-700 transition-all text-white font-semibold flex text-base relative items-center gap-2"}>
                                 Create
                             </button>
