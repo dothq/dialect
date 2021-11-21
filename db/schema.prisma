@@ -1,51 +1,54 @@
 //******** AUTO GENERATED FILE, DO NOT EDIT.  *********
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 model Language {
-    id String @id
-    name String
-    contact User @relation(fields: [contact_id], references: [id])
-    contact_id String
+  id         String   @id
+  name       String
+  contact    User     @relation(fields: [contact_id], references: [id])
+  contact_id String
+  Project    Project? @relation(fields: [projectId], references: [id])
+  projectId  Int?
 }
 
 model Project {
-    id Int @id @default(autoincrement())
-    slug String
-    name String
-    description String?
-    note String?
+  id          Int     @id @default(autoincrement())
+  slug        String
+  name        String
+  description String?
+  note        String?
 
-    author User @relation("projects", fields: [author_id], references: [id])
-    author_id String
+  author    User   @relation("projects", fields: [author_id], references: [id])
+  author_id String
 
-    contact User @relation("contact_of_projects", fields: [contact_id], references: [id])
-    contact_id String
+  contact    User   @relation("contact_of_projects", fields: [contact_id], references: [id])
+  contact_id String
 
-    deadline DateTime?
-    priority Int? @default(0)
-    supported_languages Language[]
+  deadline            DateTime?
+  priority            Int?       @default(0)
+  supported_languages Language[]
 
-    date_created DateTime @default(now())
-    date_updated DateTime?
+  date_created DateTime  @default(now())
+  date_updated DateTime?
 }
 
 model User {
-    id String @id @default(cuid())
-    name String
-    avatar_url String?
+  id         String  @id @default(cuid())
+  name       String
+  avatar_url String?
 
-    github_id String? @unique
+  github_id String? @unique
 
-    projects Project[] @relation("projects")
-    contact_of_projects Project[] @relation("contact_of_projects")
+  projects            Project[] @relation("projects")
+  contact_of_projects Project[] @relation("contact_of_projects")
 
-    date_created DateTime @default(now())
+  date_created DateTime   @default(now())
+  Language     Language[]
 }
