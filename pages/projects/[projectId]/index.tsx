@@ -115,7 +115,7 @@ export const ProjectTemplate = (project: any) => {
                     </div>
                 </div>
 
-                <div className={"p-12 relative overflow-hidden"}>
+                <div className={"p-12"}>
                     {project.children}
                 </div>
             </SidebarWMain>
