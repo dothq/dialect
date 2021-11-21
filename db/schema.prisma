@@ -1,81 +1,51 @@
 //******** AUTO GENERATED FILE, DO NOT EDIT.  *********
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
 generator client {
-  provider = "prisma-client-js"
-}
-
-model Audio {
-  engine      String        @id
-  Translation Translation[]
-}
-
-model Category {
-  id          String        @id
-  name        String
-  Translation Translation[]
-}
-
-model Highlight {
-  id       Int     @id @default(autoincrement())
-  x        Int
-  y        Int
-  width    Int
-  height   Int
-  alt      String
-  Memory   Memory? @relation(fields: [memoryId], references: [id])
-  memoryId String?
+    provider = "prisma-client-js"
 }
 
 model Language {
-  id            String       @id
-  name          String
-  maintainer_id String
-  Project       Project?     @relation(fields: [projectId], references: [id])
-  projectId     Int?
-  Translation   Translation? @relation(fields: [translationId], references: [id])
-  translationId String?
-}
-
-model Memory {
-  id            String       @id
-  alt           String
-  author_id     String
-  date_created  DateTime     @default(now())
-  date_updated  DateTime?
-  highlights    Highlight[]
-  Translation   Translation? @relation(fields: [translationId], references: [id])
-  translationId String?
+    id String @id
+    name String
+    contact User @relation(fields: [contact_id], references: [id])
+    contact_id String
 }
 
 model Project {
-  id                  Int        @id @default(autoincrement())
-  slug                String
-  name                String
-  deadline            DateTime?
-  priority            Int?       @default(0)
-  date_created        DateTime   @default(now())
-  date_updated        DateTime?
-  supported_languages Language[]
+    id Int @id @default(autoincrement())
+    slug String
+    name String
+    description String?
+    note String?
+
+    author User @relation("projects", fields: [author_id], references: [id])
+    author_id String
+
+    contact User @relation("contact_of_projects", fields: [contact_id], references: [id])
+    contact_id String
+
+    deadline DateTime?
+    priority Int? @default(0)
+    supported_languages Language[]
+
+    date_created DateTime @default(now())
+    date_updated DateTime?
 }
 
-model Translation {
-  id                  String     @id
-  string              String
-  category            Category   @relation(fields: [category_id], references: [id])
-  category_id         String
-  translation_comment String?
-  author_id           String
-  upvotes             Int        @default(0)
-  downvotes           Int        @default(0)
-  date_created        DateTime   @default(now())
-  date_updated        DateTime?
-  memories            Memory[]
-  languages           Language[]
-  audio               Audio      @relation(references: [engine], fields: [audioEngine])
-  audioEngine         String
+model User {
+    id String @id @default(cuid())
+    name String
+    avatar_url String?
+
+    github_id String? @unique
+
+    projects Project[] @relation("projects")
+    contact_of_projects Project[] @relation("contact_of_projects")
+
+    date_created DateTime @default(now())
 }

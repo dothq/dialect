@@ -4,18 +4,18 @@ import { Error } from "../components/Error";
 import { Header } from "../components/Header";
 import { SidebarWMain } from "../components/SidebarWMain";
 
-const NotFound = () => {
+const NotAuthorised = () => {
     return (
         <>
-            <NextSeo title={"404 – Dialect"} />
+            <NextSeo title={"403 – Dialect"} />
 
             <Header />
 
             <SidebarWMain hideSidebar={true}>
-                <Error code={404} message={"We were unable to find this page or resource."} />
+                <Error code={403} message={"You do not have the right authorisation to view this page or resource."} />
             </SidebarWMain>
         </>
     )
 }
 
-export default NotFound;
+export default NotAuthorised;

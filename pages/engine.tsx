@@ -3,7 +3,6 @@ import axios from "axios";
 import { NextSeo } from "next-seo";
 import React from "react";
 import { ArrowRight } from "react-feather";
-import { useSWRConfig } from "swr";
 import { Header } from "../components/Header";
 import { SidebarWMain } from "../components/SidebarWMain";
 import { useIsAuthenticated } from "../providers/Auth";
@@ -120,7 +119,6 @@ const gLanguages = {
 }
 
 const Engine = () => {
-    const { cache, mutate, ...extraConfig } = useSWRConfig()
     const authed = useIsAuthenticated();
 
     const [result, setResult] = React.useState("");

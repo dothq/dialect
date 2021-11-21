@@ -1,0 +1,12 @@
+model User {
+    id String @id @default(cuid())
+    name String
+    avatar_url String?
+
+    github_id String? @unique
+
+    projects Project[] @relation("projects")
+    contact_of_projects Project[] @relation("contact_of_projects")
+
+    date_created DateTime @default(now())
+}

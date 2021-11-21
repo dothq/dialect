@@ -1,5 +1,6 @@
 model Language {
     id String @id
     name String
-    maintainer_id String
+    contact User @relation(fields: [contact_id], references: [id])
+    contact_id String
 }

@@ -1,18 +1,24 @@
 import React from "react";
 
-const AuthContext = React.createContext({
+const AuthContext = React.createContext<{
+    isAuthenticated: boolean,
+    setAuthenticated: any,
+    user: any
+}>({
     isAuthenticated: false,
-    setAuthenticated: () => {}
+    setAuthenticated: () => {},
+    user: {}
 });
 
-export const AuthProvider = ({ children, authed }: { children: any, authed: boolean }) => {
+export const AuthProvider = ({ children, authed, user }: { children: any, authed: boolean, user: any }) => {
     const [isAuthenticated, setAuthenticated] = React.useState(authed);
 
     return (
         <AuthContext.Provider
             value={{
                 isAuthenticated,
-                setAuthenticated
+                setAuthenticated,
+                user
             } as any}
         >
             {children}

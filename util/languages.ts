@@ -34,294 +34,343 @@ export const defaultLanguages = [
     {
         code: "ar",
         name: "Arabic",
+        flag: "🇦🇪",
         script: LanguageScript.Arabic,
         direction: LanguageDirection.RTL,
     },
     {
         code: "an",
         name: "Aragonese",
+        flag: "🏴‍☠️",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR,
     },
     {
         code: "hy-AM",
         name: "Armenian",
+        flag: "🇦🇲",
         script: LanguageScript.Armenian,
         direction: LanguageDirection.LTR
     },
     {
         code: "as",
         name: "Assamese",
+        flag: "🇮🇳",
         script: LanguageScript.Bengali,
         direction: LanguageDirection.LTR
     },
     {
         code: "ast",
         name: "Asturian",
+        flag: "🏴‍☠️",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "az",
         name: "Azerbaijani",
+        flag: "🇦🇿",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "eu",
         name: "Basque",
+        flag: "🇪🇸",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "be",
         name: "Belarusian",
+        flag: "🇧🇾",
         script: LanguageScript.Cyrillic,
         direction: LanguageDirection.LTR
     },
     {
         code: "bn-BD",
         name: "Bengali",
+        flag: "🇧🇩",
         script: LanguageScript.Bengali,
         direction: LanguageDirection.LTR
     },
     {
         code: "bn-IN",
         name: "Bengali",
+        flag: "🇮🇳",
         script: LanguageScript.Bengali,
         direction: LanguageDirection.LTR
     },
     {
         code: "bs",
         name: "Bosnian",
+        flag: "🇧🇦",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "br",
         name: "Breton",
+        flag: "🇫🇷",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "bg",
         name: "Bulgarian",
+        flag: "🇧🇬",
         script: LanguageScript.Cyrillic,
         direction: LanguageDirection.LTR
     },
     {
         code: "my",
         name: "Burmese",
+        flag: "🏴‍☠️",
         script: LanguageScript.Myanmar,
         direction: LanguageDirection.LTR
     },
     {
         code: "ca",
         name: "Catalan",
+        flag: "🇪🇸",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "zh-CN",
         name: "Chinese (Simplified)",
+        flag: "🇨🇳",
         script: LanguageScript.ChineseSimplified,
         direction: LanguageDirection.LTR,
     },
     {
         code: "zh-TW",
         name: "Chinese (Traditional)",
+        flag: "🇨🇳",
         script: LanguageScript.ChineseTraditional,
         direction: LanguageDirection.LTR
     },
     {
         code: "hr",
         name: "Croatian",
+        flag: "🇭🇷",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "cs",
         name: "Czech",
+        flag: "🇨🇿",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "da",
         name: "Danish",
+        flag: "🇩🇰",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "nl",
         name: "Dutch",
+        flag: "🇳🇱",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "en-GB",
         name: "English (Great Britain)",
+        flag: "🇬🇧",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "en-US",
         name: "English (United States)",
+        flag: "🇺🇸",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "en-ZA",
         name: "English (South Africa)",
+        flag: "🇿🇦",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "eo",
         name: "Esperanto",
+        flag: "🏴‍☠️",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "et",
         name: "Estonian",
+        flag: "🇪🇪",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "fi",
         name: "Finnish",
+        flag: "🇫🇮",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "fr",
         name: "French",
+        flag: "🇫🇷",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "gd-GB",
         name: "Scottish Gaelic (Great Britain)",
+        flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "gl-ES",
         name: "Galician",
+        flag: "🇪🇸",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "ka-GE",
         name: "Georgian",
+        flag: "🇬🇪",
         script: LanguageScript.Georgian,
         direction: LanguageDirection.LTR
     },
     {
         code: "de",
         name: "German",
+        flag: "🇩🇪",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "el",
         name: "Greek",
+        flag: "🇬🇷",
         script: LanguageScript.Greek,
         direction: LanguageDirection.LTR
     },
     {
         code: "gu-IN",
         name: "Gujarati",
+        flag: "🇮🇳",
         script: LanguageScript.Gujarati,
         direction: LanguageDirection.LTR
     },
     {
         code: "ht",
         name: "Haitian",
+        flag: "🇭🇹",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "he",
         name: "Hebrew",
+        flag: "🇮🇱",
         script: LanguageScript.Hebrew,
         direction: LanguageDirection.RTL
     },
     {
         code: "hi-IN",
         name: "Hindi",
+        flag: "🇮🇳",
         script: LanguageScript.Devanagari,
         direction: LanguageDirection.LTR
     },
     {
         code: "hu-HU",
         name: "Hungarian",
+        flag: "🇭🇺",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "is-IS",
         name: "Icelandic",
+        flag: "🇮🇸",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "id-ID",
         name: "Indonesian",
+        flag: "🇮🇩",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "ga-IE",
         name: "Irish",
+        flag: "🇮🇪",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "it-IT",
         name: "Italian",
+        flag: "🇮🇹",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "ja-JP",
         name: "Japanese",
+        flag: "🇯🇵",
         script: LanguageScript.Japanese,
         direction: LanguageDirection.LTR,
     },
     {
         code: "kn",
         name: "Kannada",
+        flag: "🇮🇳",
         script: LanguageScript.Kannada,
         direction: LanguageDirection.LTR
     },
     {
         code: "kk",
         name: "Kazakh",
+        flag: "🇰🇿",
         script: LanguageScript.Cyrillic,
         direction: LanguageDirection.LTR
     },
     {
         code: "km-KH",
         name: "Khmer",
+        flag: "🇰🇭",
         script: LanguageScript.Khmer,
         direction: LanguageDirection.LTR
     },
     {
         code: "ko",
         name: "Korean",
+        flag: "🇰🇷",
         script: LanguageScript.Korean,
         direction: LanguageDirection.LTR
     },
     {
         code: "lv",
         name: "Latvian",
+        flag: "🇱🇻",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },
     {
         code: "lt",
         name: "Lithuanian",
+        flag: "🇱🇹",
         script: LanguageScript.Latin,
         direction: LanguageDirection.LTR
     },

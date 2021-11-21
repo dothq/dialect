@@ -1,8 +1,0 @@
-model Highlight {
-    id Int @id @default(autoincrement())
-    x Int
-    y Int
-    width Int
-    height Int
-    alt String
-}

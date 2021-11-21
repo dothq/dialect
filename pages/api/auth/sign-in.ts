@@ -1,25 +1,27 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nookies from "nookies";
+import { getEnvStr } from "../../../util/env";
+
+export const providerUrls: any = {
+    github: ({ id, redirect }: any) => `https://github.com/login/oauth/authorize?client_id=${id}&redirect_uri=${redirect}&scope=read:org read:user`
+}
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-    const isDev = process.env.NODE_ENV == "development";
+    const provider = req.query.id.toString();
 
     if(req.query.to) {
         nookies.set({ res }, "sign_in_redir", req.query.to.toString(), { path: "/" });
     }
 
-    const url = (id: any, redirect: any) => 
-    `https://github.com/login/oauth/authorize?client_id=${id}&redirect_uri=${redirect}&scope=read:org read:user`
+    if(provider in providerUrls) {
+        const url = providerUrls[provider]({
+            id: getEnvStr(provider, "client_id"),
+            secret: getEnvStr(provider, "client_secret"),
+            redirect: getEnvStr(provider, "redirect_uri")
+        })
 
-    if(isDev) {
-        res.redirect(url(
-            process.env.GITHUB_DEV_APP_CLIENT_ID,
-            process.env.GITHUB_DEV_APP_REDIRECT_URI
-        ))
+        res.redirect(url);
     } else {
-        res.redirect(url(
-            process.env.GITHUB_PROD_APP_CLIENT_ID,
-            process.env.GITHUB_PROD_APP_REDIRECT_URI
-        ))
+        return res.end("what")
     }
 }

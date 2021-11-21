@@ -3,6 +3,7 @@ import axios from "axios";
 import { NextSeo } from "next-seo";
 import React from "react";
 import { AlertCircle, Plus } from "react-feather";
+import { PrimaryButton } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { SidebarWMain } from "../../components/SidebarWMain";
 
@@ -106,9 +107,9 @@ const NewProject = () => {
                         </fieldset>
 
                         <fieldset className={"flex justify-center"}>
-                            <button type={"submit"} className={"rounded-xl w-max group px-4 py-2 bg-gray-900 hover:bg-gray-700 transition-all text-white font-semibold flex text-base relative items-center gap-2"}>
+                            <PrimaryButton type={"submit"}>
                                 Create
-                            </button>
+                            </PrimaryButton>
                         </fieldset>
                     </form>
                 </div>

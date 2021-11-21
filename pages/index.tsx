@@ -1,7 +1,6 @@
 import {
     IconButton,
-    InputBase,
-    Paper,
+    InputBase, Paper,
     Table,
     TableBody,
     TableCell,
@@ -16,19 +15,17 @@ import { useRouter } from "next/dist/client/router";
 import React from "react";
 import { Search, Star } from "react-feather";
 import ago from "s-ago";
-import { useSWRConfig } from "swr";
 import { Header } from "../components/Header";
 import { SidebarWMain } from "../components/SidebarWMain";
 import { db } from "../db";
-import { useIsAuthenticated } from "../providers/Auth";
+import { useAuth } from "../providers/Auth";
 
 export const A = (props: any) => React.createElement("a", props, ...props.children);
 
 const Explore = ({ projects }: { projects: Project[] }) => {
-    const { cache, mutate, ...extraConfig } = useSWRConfig()
-    const authed = useIsAuthenticated();
-
     const router = useRouter();
+
+    const { user } = useAuth();
 
     const [rows, setRows] = React.useState<Project[]>(projects);
 
@@ -40,7 +37,11 @@ const Explore = ({ projects }: { projects: Project[] }) => {
     }
 
     const update = () => {
-        const q = router.query.q?.toString();
+        const searchEl = document.getElementById("search") as any;
+
+        const q = router.query.q?.toString() || "";
+        searchEl.value = q;
+
         if(!q || !q.length) return setRows(projects);
 
         const filteredRows = projects.filter((row) => {
@@ -64,6 +65,7 @@ const Explore = ({ projects }: { projects: Project[] }) => {
                     <h1 className={"text-3xl font-semibold"}>
                         Explore
                     </h1>
+
                     <Paper 
                         sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
                         elevation={0}
@@ -75,6 +77,7 @@ const Explore = ({ projects }: { projects: Project[] }) => {
                         <InputBase
                             sx={{ ml: 1, flex: 1, pb: 0 }}
                             onChange={onChange}
+                            id={"search"}
                             componentsProps={{
                                 input: {
                                     style: { padding: "6px 0" }
@@ -101,6 +104,10 @@ const Explore = ({ projects }: { projects: Project[] }) => {
                                         key={project.id}
                                         component={A}
                                         href={`/projects/${project.slug}`}
+                                        onClick={(e: any) => {
+                                            e.preventDefault();
+                                            router.push(`/projects/${project.slug}`)
+                                        }}
                                         className={"group"}
                                         sx={{ 
                                             "&:last-child td, &:last-child th": { border: 0 }
