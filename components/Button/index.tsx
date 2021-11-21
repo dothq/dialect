@@ -13,7 +13,7 @@ export const SecondaryButton = (props: React.DetailedHTMLProps<React.ButtonHTMLA
     return (
         <PrimaryButton
             {...props}
-            className={"rounded-xl w-max group px-4 py-2 bg-gray-100 hover:bg-gray-200 transition-all text-gray-900 font-semibold flex text-base relative items-center gap-2 focus:outline-none focus:ring-4 focus:ring-gray-300"}
+            className={"rounded-xl w-max group px-4 py-2 bg-gray-100 hover:bg-gray-200 transition-all text-gray-900 font-semibold flex text-base relative items-center gap-2 focus:outline-none focus:bg-white focus:ring-4 focus:ring-gray-300"}
         >
             {props.children}
         </PrimaryButton>

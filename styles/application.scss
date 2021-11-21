@@ -50,8 +50,8 @@ body {
     overflow-y: scroll;
 }
 
-*:not(input, textarea) {
-    user-select: none;
+::selection {
+    @apply bg-blue-400 bg-opacity-30;
 }
 
 .menu-grow {

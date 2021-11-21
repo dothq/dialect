@@ -1,6 +1,6 @@
 model Project {
     id Int @id @default(autoincrement())
-    slug String
+    slug String @unique
     name String
     description String?
     note String?
@@ -8,12 +8,13 @@ model Project {
     author User @relation("projects", fields: [author_id], references: [id])
     author_id String
 
-    contact User @relation("contact_of_projects", fields: [contact_id], references: [id])
-    contact_id String
+    contact User? @relation("contact_of_projects", fields: [contact_id], references: [id])
+    contact_id String?
 
     deadline DateTime?
     priority Int? @default(0)
-    supported_languages Language[]
+
+    languages Language[]
 
     date_created DateTime @default(now())
     date_updated DateTime?

@@ -4,8 +4,7 @@ import { ensureAuth, getUser } from "../../../../../../util/auth";
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     await ensureAuth(req, res);
 
-    const user = await getUser(req);
-    if(!user) res.status(403).json({ ok: false });
+    const user = await getUser({ req, res });
 
     // const translation = await db.translation.create({
     //     data: {

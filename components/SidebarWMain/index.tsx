@@ -6,7 +6,7 @@ export const SidebarWMain = ({ children, sidebar, hideSidebar }: { children: any
     return (
         <div className={"w-full px-4 md:px-8 xl:px-0 flex justify-center h-full"}>
             <div className={"divide-gray-200 flex max-w-7xl w-full border-b border-gray-200 h-full flex-col divide-y lg:divide-y-0 lg:divide-x lg:flex-row"}>
-                {!hideSidebar && <aside className={"w-full lg:w-64 py-5 flex flex-col gap-4 lg:sticky top-16 h-0"}>
+                {!hideSidebar && <aside className={"w-full lg:w-64 py-5 flex flex-col gap-4 lg:sticky top-16"} style={{ height: "inherit" }}>
                     {sidebar ? sidebar : <>
                         <SidebarSection initiallyOpen={true} name={"Languages"}>
                             <SidebarItem>

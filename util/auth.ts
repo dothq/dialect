@@ -19,10 +19,20 @@ export const getUserSelf = async({ req, res }: { req: NextApiRequest, res: NextA
     return getUser({ req, res });
 }
 
-export const getUser = async ({ id, req, res }: { id?: string, req: NextApiRequest, res: NextApiResponse }): Promise<any> => {
+export const getUserAnonymously = async (id: string) => {
+    const match = await db.user.findFirst({
+        where: {
+            id
+        }
+    });
+
+    return match;
+}
+
+export const getUser = async ({ id, req, res }: { id?: string, req: NextApiRequest, res?: NextApiResponse }): Promise<any> => {
     return new Promise(async (resolve) => {
         const error = () => {
-            res.status(403).json({ ok: false });
+            if(res) res.status(403).json({ ok: false });
             resolve(false);
         }
 

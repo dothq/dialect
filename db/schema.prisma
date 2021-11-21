@@ -10,17 +10,19 @@ generator client {
 }
 
 model Language {
-  id         String   @id
-  name       String
-  contact    User     @relation(fields: [contact_id], references: [id])
+  id   String @id
+  name String
+
+  project    Project @relation(fields: [project_id], references: [id])
+  project_id Int
+
+  contact    User   @relation(fields: [contact_id], references: [id])
   contact_id String
-  Project    Project? @relation(fields: [projectId], references: [id])
-  projectId  Int?
 }
 
 model Project {
   id          Int     @id @default(autoincrement())
-  slug        String
+  slug        String  @unique
   name        String
   description String?
   note        String?
@@ -28,12 +30,13 @@ model Project {
   author    User   @relation("projects", fields: [author_id], references: [id])
   author_id String
 
-  contact    User   @relation("contact_of_projects", fields: [contact_id], references: [id])
-  contact_id String
+  contact    User?   @relation("contact_of_projects", fields: [contact_id], references: [id])
+  contact_id String?
 
-  deadline            DateTime?
-  priority            Int?       @default(0)
-  supported_languages Language[]
+  deadline DateTime?
+  priority Int?      @default(0)
+
+  languages Language[]
 
   date_created DateTime  @default(now())
   date_updated DateTime?

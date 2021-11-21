@@ -185,7 +185,7 @@ const Engine = () => {
                                     >
                                         <MenuItem value={"auto"}>Detect Language</MenuItem>
                                         {Object.entries(gLanguages).map(([key, value]) => (
-                                            <MenuItem value={key}>{value}</MenuItem>
+                                            <MenuItem key={key} value={key}>{value}</MenuItem>
                                         ))}
                                     </Select>
                                 </FormControl>
@@ -214,7 +214,7 @@ const Engine = () => {
                                         onChange={(e: any) => setTo(e.target.value)}
                                     >
                                         {Object.entries(gLanguages).map(([key, value]) => (
-                                            <MenuItem value={key}>{value}</MenuItem>
+                                            <MenuItem key={key} value={key}>{value}</MenuItem>
                                         ))}
                                     </Select>
                                 </FormControl>

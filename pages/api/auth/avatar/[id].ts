@@ -1,10 +1,10 @@
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getUser } from "../../../../util/auth";
+import { getUserAnonymously } from "../../../../util/auth";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const id = req.query.id.toString();
-    const user = await getUser({ id, req, res });
+    const user = await getUserAnonymously(id);
     
     if(user && user.avatar_url && user.avatar_url.length) {
         const { data } = await axios.get(user.avatar_url, { responseType: "arraybuffer" });

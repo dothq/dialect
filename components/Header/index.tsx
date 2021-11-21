@@ -65,12 +65,12 @@ export const Header = () => {
                                 <DropdownMenuItem onClick={() => router.push("/new/project")}>
                                     New project
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => router.push("/new/language")}>
+                                {/* <DropdownMenuItem onClick={() => router.push("/new/language")}>
                                     New language
                                 </DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => router.push("/new/organisation")}>
                                     New organisation
-                                </DropdownMenuItem>
+                                </DropdownMenuItem> */}
                             </DropdownMenu>
                         </div>
 

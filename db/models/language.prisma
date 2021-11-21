@@ -1,6 +1,10 @@
 model Language {
     id String @id
     name String
+
+    project Project @relation(fields: [project_id], references: [id])
+    project_id Int
+
     contact User @relation(fields: [contact_id], references: [id])
     contact_id String
 }

@@ -3,7 +3,7 @@ import React from "react";
 
 export const DropdownMenuItem = (props: RadixMenu.DropdownMenuItemProps) => {
     return (
-        <RadixMenu.Item className={`w-full h-10 font-medium text-base text-gray-800 outline-none flex items-center px-4 bg-black bg-opacity-0 hover:bg-opacity-5 active:bg-opacity-10 ${props.disabled ? `pointer-events-none opacity-50` : ``}`} {...props}>
+        <RadixMenu.Item className={`w-full h-10 select-none font-medium text-base text-gray-800 outline-none flex items-center px-4 bg-black bg-opacity-0 hover:bg-opacity-5 active:bg-opacity-10 ${props.disabled ? `pointer-events-none opacity-50` : ``}`} {...props}>
             {props.children}
         </RadixMenu.Item>
     )

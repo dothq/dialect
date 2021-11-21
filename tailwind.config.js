@@ -7,7 +7,11 @@ module.exports = {
   variants: {
     extend: {
       backgroundColor: ['active'],
-      blur: ['group-hover']
+      blur: ['group-hover'],
+      border: ['hover'],
+      borderStyle: ['hover'],
+      borderWidth: ['hover', 'focus'],
+      borderColor: ['hover', 'focus'],
     },
   },
   plugins: [],

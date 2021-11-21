@@ -1,34 +1,56 @@
 import TextField from "@mui/material/TextField";
 import axios from "axios";
+import { useFormik } from "formik";
+import absoluteUrl from "next-absolute-url";
 import { NextSeo } from "next-seo";
+import { useRouter } from "next/dist/client/router";
 import React from "react";
-import { AlertCircle, Plus } from "react-feather";
+import { Plus } from "react-feather";
+import slugify from "slugify";
+import * as yup from "yup";
 import { PrimaryButton } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { SidebarWMain } from "../../components/SidebarWMain";
 
+const newProjectSchema = yup.object({
+    slug: yup
+        .string()
+        .min(2, "Slug must be longer than 2 characters")
+        .max(64, "Slug must be less than 64 characters")
+        .required("Slug is required"),
+    name: yup
+        .string()
+        .min(2, "Name must be longer than 2 characters")
+        .max(100, "Name must be less than 100 characters")
+        .required("Name is required"),
+})
+
 const NewProject = () => {
+    const router = useRouter();
+
     const [hint, setHint] = React.useState<boolean[]>([false, false]);
 
-    const [name, setName] = React.useState("");
-    const [slug, setSlug] = React.useState("");
-    const [url, setUrl] = React.useState("");
+    const [url, setUrl] = React.useState<any>();
 
-    const [error, setError] = React.useState<any>("");
-    const [inputError, setIError] = React.useState(false);
-
-    const create = (e: any) => {
-        e.preventDefault();
-
-        setError(null);
-
-        setTimeout(() => {
-            axios.post("/api/projects/create", { name, slug })
+    const formik = useFormik({
+        initialValues: {
+            name: "",
+            slug: ""
+        },
+        validationSchema: newProjectSchema,
+        onSubmit: (data: any) => {
+            axios.post("/api/projects/create", data)
                 .then(res => {
-                    window.location.href = `/projects/${slug}`
-                }).catch(e => setError(e.message))
-        }, 500);
-    }
+                    router.push(`/projects/${res.data.slug}`)
+                })
+        }
+    })
+
+    React.useEffect(() => {
+        const slugged = slugify(formik.values.name || "").toLowerCase();
+        
+        setUrl(slugged);
+    }, [formik.values.name])
 
     return (
         <>
@@ -49,65 +71,52 @@ const NewProject = () => {
                         A project holds all your languages and translations.
                     </p>
 
-                    <div
-                        className={"transition-all overflow-hidden flex"}
-                        style={{
-                            display: error ? "" : "none"
-                        }}
+                    <form 
+                        onSubmit={formik.handleSubmit} 
+                        className={"mt-5 flex flex-col gap-8 w-full items-center"}
                     >
-                        <span 
-                            className={"text-red-500 font-medium flex gap-2 overflow-hidden"}
-                        >
-                            <AlertCircle className={"stroke-current"} />
-                            {error}
-                        </span>
-                    </div>
-
-                    <form className={"mt-5 flex flex-col gap-8 w-full items-center"} onSubmit={create}>
+                        <fieldset className={"hidden"}>
+                            <TextField 
+                                id={"slug"}
+                                fullWidth 
+                                variant="standard"
+                                value={formik.values.slug}
+                                onChange={formik.handleChange}
+                                error={formik.touched.slug && Boolean(formik.errors.slug)}
+                                helperText={formik.touched.slug && formik.errors.slug}
+                                className={"flex"}
+                            />
+                        </fieldset>
+                        
                         <fieldset className={"flex flex-col gap-4 w-96"}>
                             <TextField 
+                                id={"name"}
                                 fullWidth 
                                 label="Project name" 
                                 variant="standard"
-                                error={inputError}
-                                value={name}
-                                className={"flex"}
-                                onChange={(e) => {
-                                    setHint([true, hint[1]])
-                                    setName(e.target.value.substr(0, 64));
-
-                                    let slug = e.target.value;
-                                    slug = slug.toLowerCase();
-                                    
-                                    slug = slug.replace(/\//g, "-");
-                                    slug = slug.replace(/ /g, "-");
-
-                                    if(slug.endsWith("--")) {
-                                        slug = slug.replace(/--/g, "-");
-                                    }
-
-                                    if(slug.length >= 64) {
-                                        slug = slug.substr(0, 64);
-                                    }
-
-                                    setIError(
-                                        slug.length <= 0 ||
-                                        name.length > 63
-                                    );
-
-                                    setSlug(slug);
-                                    setUrl(`${window.location.protocol}//${window.location.hostname}${window.location.port ? `:${window.location.port}`: ``}/${slug}`)
+                                value={formik.values.name}
+                                onChange={formik.handleChange}
+                                error={formik.touched.name && Boolean(formik.errors.name)}
+                                helperText={formik.touched.name && formik.errors.name}
+                                type={"gfsdgfhg"}
+                                InputProps={{
+                                    autoComplete: "off",
+                                    autoCapitalize: "false",
+                                    autoCorrect: "false"
                                 }}
+                                className={"flex"}
+                                onBlur={() => formik.setFieldValue("slug", url)}
                             />
-                            <span className={"text-sm text-gray-600"} style={{ opacity: Number(hint[0]) }}>
-                                Your project URL will be: <strong className={"font-medium"}>
-                                    {url}
+                            <span className={"text-gray-600 text-left transition-all select-none"} style={{ fontSize: "12px", opacity: Number(url && url.length) }}>
+                                Your project URL will be:{" "}
+                                <strong className={"font-medium"}>
+                                    {absoluteUrl().origin}/projects/{url}
                                 </strong>
                             </span>
                         </fieldset>
 
                         <fieldset className={"flex justify-center"}>
-                            <PrimaryButton type={"submit"}>
+                            <PrimaryButton type={"submit"} style={{ opacity: url ? 1 : 0.5, pointerEvents: url ? "all" : "none" }}>
                                 Create
                             </PrimaryButton>
                         </fieldset>

@@ -1,31 +1,50 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { db } from "../../../db";
-import { ensureAuth, getUser } from "../../../util/auth";
+import { getUserSelf } from "../../../util/auth";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-    if(req.method == "PUT") {
-        await ensureAuth(req, res);
+    const user = await getUserSelf({ req, res });
+    const id = parseInt(req.query.id.toString());
 
-        const user = await getUser(req);
-        if(!user) return res.status(403).json({ ok: false });
+    if(isNaN(id)) return res.status(404).json({ ok: false });
 
-        const project = await db.project.findFirst({
-            where: { slug: req.query.id.toString() }
-        });
+    let project = await db.project.findFirst({
+        where: { id: parseInt(req.query.id.toString()) }
+    });
 
-        if(!project) return res.status(404).json({ ok: false });
+    if(!project) return res.status(404).json({ ok: false });
 
-        if(project.author_id !== user.id) return res.status(403).json({ ok: false });
+    switch(req.method) {
+        case "PUT":
+            if(project.author_id !== user.id) return res.status(403).json({ ok: false });
+            if(req.body.slug && !req.body.slug.length) return res.status(400).json({ ok: false });
 
-        await db.project.update({
-            where: {
-                id: project.id
-            },
-            data: req.body
-        });
+            delete req.body.author;
 
-        res.json({ ok: true });
-    } else {
-        res.status(404);
+            project = await db.project.update({
+                where: {
+                    id: project.id
+                },
+                data: {
+                    ...req.body,
+                    date_updated: new Date().toISOString()
+                }
+            });
+
+            res.json(project);
+            break;
+        case "DELETE":
+            await db.project.delete({
+                where: {
+                    id: project.id
+                }
+            })
+
+            res.json({ ok: true });
+            break;
+        case "GET":
+        default:
+            res.json(project);
+            break;
     }
 }

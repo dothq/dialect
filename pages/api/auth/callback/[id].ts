@@ -68,7 +68,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if(!match) {
         const payload: any = {
             name: profile.name,
-            username: profile.login,
             avatar_url: profile.avatar_url,
         };
 
