@@ -12,7 +12,7 @@ const AuthContext = React.createContext<{
 
 export const AuthProvider = ({ children, authed, user }: { children: any, authed: boolean, user: any }) => {
     const [isAuthenticated, setAuthenticated] = React.useState(authed);
-
+    
     return (
         <AuthContext.Provider
             value={{

@@ -141,7 +141,7 @@ const Engine = () => {
             setResult("Translating...");
 
             axios.get(
-                `/api/engine/translate?q=${value}&from=${from}&to=${to}`
+                `/api/engine/translate?input=${value}&from=${from}&to=${to}`
             ).then(r => {
                 setResult(r.data.translated);
             })

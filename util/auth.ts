@@ -4,15 +4,7 @@ import nookies from "nookies";
 import { db } from "../db";
 
 export const ensureAuth = async (req: NextApiRequest, res: NextApiResponse) => {
-    return new Promise((resolve) => {
-        const cookies = nookies.get({ req });
-
-        if(cookies && cookies.session) {
-            resolve(true);
-        } else {
-            res.status(403).json({ ok: false });
-        }
-    })
+    return await getUserSelf({ req, res })
 }
 
 export const getUserSelf = async({ req, res }: { req: NextApiRequest, res: NextApiResponse }) => {
@@ -33,7 +25,7 @@ export const getUser = async ({ id, req, res }: { id?: string, req: NextApiReque
     return new Promise(async (resolve) => {
         const error = () => {
             if(res) res.status(403).json({ ok: false });
-            resolve(false);
+            return resolve(false);
         }
 
         const cookies = nookies.get({ req });
@@ -54,16 +46,22 @@ export const getUser = async ({ id, req, res }: { id?: string, req: NextApiReque
                     if(match) {
                         resolve(match);
                     } else {
+                        console.log("no matc")
                         error();
                     }
                 } else {
+                    console.log("no dat")
                     error();
                 }
             } catch(e) {
+                console.log("idfk")
+
                 error();
             }
         } else {
-            resolve(null);
+            console.log("no cook")
+
+            error();
         }
 
         resolve(true);
