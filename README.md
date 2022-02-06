@@ -17,11 +17,11 @@ Localise your application with ease with the open-source translation tool, Diale
 
 ## 🔧 Contributing
 
-We accept all positive contributions that affects this repository and service as a whole. If you are interested in helping the automatic translations, visit [Dot Translate](https://github.com/dothq/translate).
+We accept all positive contributions that affects this repository and service as a whole. If you are interested in helping the automatic translations, visit [Dot Lexicon](https://github.com/dothq/translate).
 
 ## ❤️ Acknowledgements
 
-This project is ran on [Next.js](https://nextjs.org/). | This project uses [Dot Translate](https://github.com/dothq/translate) for all translations.
+This project is ran on [Next.js](https://nextjs.org/). | This project uses [Dot Lexicon](https://github.com/dothq/translate) for all translations.
 
 ## 📜 Licenses
 **Dot Dialect** is licensed under the [MPL-2.0](https://www.mozilla.org/en-US/MPL/2.0/) license.
